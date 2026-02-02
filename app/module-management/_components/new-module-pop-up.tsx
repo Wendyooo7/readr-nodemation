@@ -21,6 +21,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { useModuleStore } from "@/stores/module-management/module-store";
+import { useState, useRef } from "react";
 
 export default function NewModulePopUp() {
   const DialogContentStyle =
@@ -33,9 +35,48 @@ export default function NewModulePopUp() {
   const selectTriggerStyle =
     "w-full cursor-pointer data-[placeholder]:text-gray-600 data-[state=open]:border-gray-600";
 
+  const moduleNameRef = useRef<HTMLInputElement>(null);
+  const [moduleType, setModuleType] = useState("ai");
+  const moduleDescriptionRef = useRef<HTMLInputElement>(null);
+
+  const { addAiModule, addCodeModule, addCmsModule, addExportModule } =
+    useModuleStore();
+
+  const handleSubmit = () => {
+    const moduleName = moduleNameRef.current?.value;
+    const moduleDescription = moduleDescriptionRef.current?.value;
+
+    if (!moduleName) {
+      return;
+    }
+
+    const moduleData = {
+      name: moduleName,
+      description: moduleDescription,
+    };
+
+    switch (moduleType) {
+      case "ai":
+        addAiModule(moduleData);
+        break;
+      case "code":
+        addCodeModule(moduleData);
+        break;
+      case "cms":
+        addCmsModule(moduleData);
+        break;
+      case "content":
+        addExportModule(moduleData);
+        break;
+      default:
+        addAiModule(moduleData);
+        break;
+    }
+  };
+
   return (
     <Dialog>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <DialogTrigger asChild>
           <Button className="body-2 bg-green-500 text-white hover:bg-green-700">
             <PlusIcon size={16} />
@@ -56,6 +97,7 @@ export default function NewModulePopUp() {
                 模組名稱
               </Label>
               <Input
+                ref={moduleNameRef}
                 id="module-name"
                 name="模組名稱"
                 placeholder="請輸入名稱"
@@ -67,7 +109,10 @@ export default function NewModulePopUp() {
               <Label htmlFor="module-type" className={labelStyle}>
                 模組類型
               </Label>
-              <Select>
+              <Select
+                value={moduleType}
+                onValueChange={(value) => setModuleType(value)}
+              >
                 <SelectTrigger
                   id="module-type"
                   className={cn(inputBasicStyle, selectTriggerStyle)}
@@ -97,6 +142,7 @@ export default function NewModulePopUp() {
                 模組說明（選填）
               </Label>
               <Input
+                ref={moduleDescriptionRef}
                 id="module-description"
                 name="模組說明"
                 placeholder="請輸入內容"
@@ -118,13 +164,16 @@ export default function NewModulePopUp() {
               </Button>
             </DialogClose>
 
-            <Button
-              type="submit"
-              className="flex-1 px-3 border-gray-400 text-white bg-green-500 hover:bg-green-700"
-            >
-              <Save size={16} />
-              <span>儲存</span>
-            </Button>
+            <DialogClose asChild>
+              <Button
+                onClick={handleSubmit}
+                type="submit"
+                className="flex-1 px-3 border-gray-400 text-white bg-green-500 hover:bg-green-700"
+              >
+                <Save size={16} />
+                <span>儲存</span>
+              </Button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </form>
