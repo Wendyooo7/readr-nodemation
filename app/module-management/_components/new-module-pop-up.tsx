@@ -39,7 +39,7 @@ export default function NewModulePopUp() {
   const [moduleType, setModuleType] = useState("ai");
   const moduleDescriptionRef = useRef<HTMLInputElement>(null);
 
-  const { addAiModule, addCodeModule, addCmsModule, addExportModule } =
+  const { addAiModule, addCodeModule, addCmsModule, addContentModule } =
     useModuleStore();
 
   const handleSubmit = () => {
@@ -50,26 +50,21 @@ export default function NewModulePopUp() {
       return;
     }
 
-    const moduleData = {
-      name: moduleName,
-      description: moduleDescription,
-    };
-
     switch (moduleType) {
       case "ai":
-        addAiModule(moduleData);
+        addAiModule(moduleName, moduleDescription);
         break;
       case "code":
-        addCodeModule(moduleData);
+        addCodeModule(moduleName, moduleDescription);
         break;
       case "cms":
-        addCmsModule(moduleData);
+        addCmsModule(moduleName, moduleDescription);
         break;
       case "content":
-        addExportModule(moduleData);
+        addContentModule(moduleName, moduleDescription);
         break;
       default:
-        addAiModule(moduleData);
+        addAiModule(moduleName, moduleDescription);
         break;
     }
   };
