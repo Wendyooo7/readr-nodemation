@@ -67,6 +67,14 @@ export default function NewModulePopUp() {
         addAiModule(moduleName, moduleDescription);
         break;
     }
+
+    if (moduleNameRef.current) {
+      moduleNameRef.current.value = "";
+    }
+
+    if (moduleDescriptionRef.current) {
+      moduleDescriptionRef.current.value = "";
+    }
   };
 
   return (
