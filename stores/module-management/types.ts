@@ -15,7 +15,7 @@ export type ModuleUnit = {
   action: string;
   actionIcon: LucideIcon;
   actionCode: "ai" | "code" | "cms" | "content";
-  description: string;
+  description?: string;
   popUpChild: React.ComponentType<PopUpChildProps>;
 };
 
