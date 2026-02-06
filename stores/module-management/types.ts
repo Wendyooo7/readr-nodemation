@@ -6,7 +6,7 @@ export type PopUpChildProps = {
 
 export type ModuleType = {
   name: string;
-  storeKey: "AiModule" | "CmsModule" | "CodeModule" | "ExportModule"; // 對應 Zustand Store 的 key
+  storeKey: "AiModules" | "CmsModules" | "CodeModules" | "ContentModules";
   units: ModuleUnit[];
 };
 
