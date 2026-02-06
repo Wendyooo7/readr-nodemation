@@ -1,38 +1,13 @@
 import { create } from "zustand";
+import { ModuleStore } from "./types";
+import { createAiModuleSlice } from "./slices/ai-module-slice";
+import { createCodeModuleSlice } from "./slices/code-module-slice";
+import { createCmsModuleSlice } from "./slices/cms-module-slice";
+import { createContentModuleSlice } from "./slices/content-module-slice";
 
-export type Module = {
-  name: string;
-  description?: string;
-};
-
-type ModuleStore = {
-  AiModules: Module[];
-  addAiModule: (module: Module) => void;
-
-  CmsModules: Module[];
-  addCmsModule: (module: Module) => void;
-
-  CodeModules: Module[];
-  addCodeModule: (module: Module) => void;
-
-  ExportModules: Module[];
-  addExportModule: (module: Module) => void;
-};
-
-export const useModuleStore = create<ModuleStore>((set) => ({
-  AiModules: [],
-  addAiModule: (module) =>
-    set((state) => ({ AiModules: [...state.AiModules, module] })),
-
-  CmsModules: [],
-  addCmsModule: (module) =>
-    set((state) => ({ CmsModules: [...state.CmsModules, module] })),
-
-  CodeModules: [],
-  addCodeModule: (module) =>
-    set((state) => ({ CodeModules: [...state.CodeModules, module] })),
-
-  ExportModules: [],
-  addExportModule: (module) =>
-    set((state) => ({ ExportModules: [...state.ExportModules, module] })),
+export const useModuleStore = create<ModuleStore>((set, get, StoreApi) => ({
+  ...createAiModuleSlice(set, get, StoreApi),
+  ...createCmsModuleSlice(set, get, StoreApi),
+  ...createCodeModuleSlice(set, get, StoreApi),
+  ...createContentModuleSlice(set, get, StoreApi),
 }));
