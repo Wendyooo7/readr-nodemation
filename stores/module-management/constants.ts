@@ -19,7 +19,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
     storeKey: "AiModule",
     units: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         action: "呼叫 AI",
         actionIcon: Sparkles,
         actionCode: "ai",
@@ -33,7 +33,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
     storeKey: "CodeModule",
     units: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         action: "撰寫程式碼",
         actionIcon: Code2,
         actionCode: "code",
@@ -47,7 +47,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
     storeKey: "CmsModule",
     units: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         action: "從 CMS 輸入",
         actionIcon: Database,
         actionCode: "cms",
@@ -55,7 +55,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
         popUpChild: CmsModulePopUpChild,
       },
       {
-        id: 2,
+        id: crypto.randomUUID(),
         action: "輸出到 CMS",
         actionIcon: Share2,
         actionCode: "cms",
@@ -69,7 +69,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
     storeKey: "ExportModule",
     units: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         action: "匯出結果",
         actionIcon: Download,
         actionCode: "content",
@@ -77,7 +77,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
         popUpChild: ContentModulePopUpChild,
       },
       {
-        id: 2,
+        id: crypto.randomUUID(),
         action: "產出報告紀錄",
         actionIcon: FileSpreadsheet,
         actionCode: "content",
