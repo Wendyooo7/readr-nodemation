@@ -16,7 +16,7 @@ import ContentModulePopUpChild from "@/app/module-management/_components/content
 export const DEFAULT_MODULES: ModuleType[] = [
   {
     name: "AI 模組",
-    storeKey: "AiModule",
+    storeKey: "AiModules",
     units: [
       {
         id: crypto.randomUUID(),
@@ -30,7 +30,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
   },
   {
     name: "程式碼模組",
-    storeKey: "CodeModule",
+    storeKey: "CodeModules",
     units: [
       {
         id: crypto.randomUUID(),
@@ -44,7 +44,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
   },
   {
     name: "CMS 模組",
-    storeKey: "CmsModule",
+    storeKey: "CmsModules",
     units: [
       {
         id: crypto.randomUUID(),
@@ -66,7 +66,7 @@ export const DEFAULT_MODULES: ModuleType[] = [
   },
   {
     name: "內容整理模組",
-    storeKey: "ExportModule",
+    storeKey: "ContentModules",
     units: [
       {
         id: crypto.randomUUID(),
