@@ -11,7 +11,7 @@ export type ModuleType = {
 };
 
 export type ModuleUnit = {
-  id: number;
+  id: string;
   action: string;
   actionIcon: LucideIcon;
   actionCode: "ai" | "code" | "cms" | "content";
