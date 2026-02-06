@@ -17,6 +17,7 @@ export type ModuleUnit = {
   actionCode: "ai" | "code" | "cms" | "content";
   description?: string;
   popUpChild: React.ComponentType<PopUpChildProps>;
+  isDefault: boolean;
 };
 
 export type BasicModuleData = {

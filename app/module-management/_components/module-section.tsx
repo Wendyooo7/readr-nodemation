@@ -26,6 +26,7 @@ export default function ModuleSection() {
             actionIcon: defaultModule.units[0].actionIcon,
             actionCode: defaultModule.units[0].actionCode,
             popUpChild: defaultModule.units[0].popUpChild,
+            isDefault: false,
           })) || [];
 
         const units = [...defaultModule.units, ...userCreatedModules];
@@ -45,6 +46,7 @@ export default function ModuleSection() {
                   active={true}
                   // TODO: 暫時將上行 'active' 屬性值寫死為真, 之後此屬性將由 state 接手
                   popUpChild={<unit.popUpChild />}
+                  isDefault={unit.isDefault}
                 />
               ))}
             </div>

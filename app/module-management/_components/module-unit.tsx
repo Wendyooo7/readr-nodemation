@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { CircleCheck, CircleX } from "lucide-react";
+import { CircleCheck, CircleX, Trash2 } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import toggleActive from "@/public/module-management/toggle-active.svg";
 import toggleInactive from "@/public/module-management/toggle-inactive.svg";
 import type { ModuleType } from "./module-section";
 import ModuleSettingPopUpLayout from "./module-setting-popup-layout";
+import { Button } from "@/components/ui/button";
 
 const actionIconVariants = cva(
   "flex items-center justify-center size-10 rounded-[10px] text-white",
@@ -39,6 +40,34 @@ const actionCodeVariants = cva("absolute top-0 left-4 w-12 h-1 rounded-b-md", {
   },
 });
 
+const trashIconVariants = cva("cursor-pointer", {
+  variants: {
+    actionCode: {
+      ai: "text-red-500",
+      code: "text-purple-500",
+      cms: "text-green-500",
+      content: "text-blue-500",
+    },
+  },
+  defaultVariants: {
+    actionCode: "ai",
+  },
+});
+
+const trashIconWrapperVariants = cva("has-[>svg]:px-2", {
+  variants: {
+    actionCode: {
+      ai: "hover:bg-red-100",
+      code: "hover:bg-purple-100",
+      cms: "hover:bg-green-100",
+      content: "hover:bg-blue-100",
+    },
+  },
+  defaultVariants: {
+    actionCode: "ai",
+  },
+});
+
 export default function ModuleUnit({
   action,
   actionIcon: ActionIcon,
@@ -46,9 +75,12 @@ export default function ModuleUnit({
   description,
   active,
   popUpChild,
+  isDefault,
 }: ModuleType["units"][number] &
   VariantProps<typeof actionIconVariants> &
-  VariantProps<typeof actionCodeVariants>) {
+  VariantProps<typeof actionCodeVariants> &
+  VariantProps<typeof trashIconVariants> &
+  VariantProps<typeof trashIconWrapperVariants>) {
   const activeUnit = (
     <div className="flex justify-between items-center border-t border-gray-400 pt-4">
       <div className="flex items-center gap-x-2 text-green-500">
@@ -71,6 +103,17 @@ export default function ModuleUnit({
             return popUpChild;
           }}
         </ModuleSettingPopUpLayout>
+        {!isDefault && (
+          <Button
+            variant="ghost"
+            className={cn(trashIconWrapperVariants({ actionCode }))}
+          >
+            <Trash2
+              size={16}
+              className={cn(trashIconVariants({ actionCode }))}
+            />
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -97,6 +140,17 @@ export default function ModuleUnit({
             return popUpChild;
           }}
         </ModuleSettingPopUpLayout>
+        {!isDefault && (
+          <Button
+            variant="ghost"
+            className={cn(trashIconWrapperVariants({ actionCode }))}
+          >
+            <Trash2
+              size={16}
+              className={cn(trashIconVariants({ actionCode }))}
+            />
+          </Button>
+        )}
       </div>
     </div>
   );
