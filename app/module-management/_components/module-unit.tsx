@@ -5,9 +5,10 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import toggleActive from "@/public/module-management/toggle-active.svg";
 import toggleInactive from "@/public/module-management/toggle-inactive.svg";
-import type { ModuleType } from "./module-section";
+import type { ModuleUnit } from "@/stores/module-management/types";
 import ModuleSettingPopUpLayout from "./module-setting-popup-layout";
 import { Button } from "@/components/ui/button";
+import { useModuleStore } from "@/stores/module-management/module-store";
 
 const actionIconVariants = cva(
   "flex items-center justify-center size-10 rounded-[10px] text-white",
@@ -69,6 +70,7 @@ const trashIconWrapperVariants = cva("has-[>svg]:px-2", {
 });
 
 export default function ModuleUnit({
+  id,
   action,
   actionIcon: ActionIcon,
   actionCode,
@@ -76,11 +78,37 @@ export default function ModuleUnit({
   active,
   popUpChild,
   isDefault,
-}: ModuleType["units"][number] &
+}: ModuleUnit &
   VariantProps<typeof actionIconVariants> &
   VariantProps<typeof actionCodeVariants> &
   VariantProps<typeof trashIconVariants> &
   VariantProps<typeof trashIconWrapperVariants>) {
+  const {
+    deleteAiModule,
+    deleteCodeModule,
+    deleteCmsModule,
+    deleteContentModule,
+  } = useModuleStore();
+
+  const handleClick = (id: string, actionCode: string) => {
+    switch (actionCode) {
+      case "ai":
+        deleteAiModule(id);
+        break;
+      case "code":
+        deleteCodeModule(id);
+        break;
+      case "cms":
+        deleteCmsModule(id);
+        break;
+      case "content":
+        deleteContentModule(id);
+        break;
+      default:
+        break;
+    }
+  };
+
   const activeUnit = (
     <div className="flex justify-between items-center border-t border-gray-400 pt-4">
       <div className="flex items-center gap-x-2 text-green-500">
@@ -97,14 +125,13 @@ export default function ModuleUnit({
         />
         <ModuleSettingPopUpLayout action={action} description={description}>
           {({ action }) => {
-            if (React.isValidElement(popUpChild)) {
-              return React.cloneElement(popUpChild, { action });
-            }
-            return popUpChild;
+            const PopUpChildComponent = popUpChild;
+            return <PopUpChildComponent action={action} />;
           }}
         </ModuleSettingPopUpLayout>
         {!isDefault && (
           <Button
+            onClick={() => handleClick(id, actionCode)}
             variant="ghost"
             className={cn(trashIconWrapperVariants({ actionCode }))}
           >
@@ -134,10 +161,8 @@ export default function ModuleUnit({
         />
         <ModuleSettingPopUpLayout action={action} description={description}>
           {({ action }) => {
-            if (React.isValidElement(popUpChild)) {
-              return React.cloneElement(popUpChild, { action });
-            }
-            return popUpChild;
+            const PopUpChildComponent = popUpChild;
+            return <PopUpChildComponent action={action} />;
           }}
         </ModuleSettingPopUpLayout>
         {!isDefault && (
