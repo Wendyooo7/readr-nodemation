@@ -23,7 +23,7 @@ export default function ModuleSettingPopUpLayout({
 }: {
   children: (props: { action: string }) => React.ReactNode;
   action: string;
-  description: string;
+  description?: string;
 }) {
   const DialogContentStyle =
     "max-w-[512px] border border-gray-400 rounded-xl p-6 bg-gray-200 gap-y-5 [&_[data-slot=dialog-close]:hover]:bg-gray-400 [&_[data-slot=dialog-close]:hover]:ring-0 [&_[data-slot=dialog-close]:hover]:ring-offset-0 [&_[data-slot=dialog-close]]:cursor-pointer [&_[data-slot=dialog-close]]:p-2 [&_[data-slot=dialog-close]]:rounded-lg";
