@@ -15,4 +15,10 @@ export const createCmsModuleSlice: StateCreator<
         { id: crypto.randomUUID(), name, description },
       ],
     })),
+  deleteCmsModule: (id: string) =>
+    set((state) => ({
+      CmsModules: [
+        ...state.CmsModules.filter((cmsModule) => cmsModule.id !== id),
+      ],
+    })),
 });
