@@ -18,6 +18,7 @@ export type ModuleUnit = {
   description?: string;
   popUpChild: React.ComponentType<PopUpChildProps>;
   isDefault: boolean;
+  active: boolean;
 };
 
 export type BasicModuleData = {
@@ -29,21 +30,25 @@ export type BasicModuleData = {
 export type AiModuleSlice = {
   AiModules: BasicModuleData[];
   addAiModule: (name: string, description?: string) => void;
+  deleteAiModule: (id: string) => void;
 };
 
 export type CodeModuleSlice = {
   CodeModules: BasicModuleData[];
   addCodeModule: (name: string, description?: string) => void;
+  deleteCodeModule: (id: string) => void;
 };
 
 export type CmsModuleSlice = {
   CmsModules: BasicModuleData[];
   addCmsModule: (name: string, description?: string) => void;
+  deleteCmsModule: (id: string) => void;
 };
 
 export type ContentModuleSlice = {
   ContentModules: BasicModuleData[];
   addContentModule: (name: string, description?: string) => void;
+  deleteContentModule: (id: string) => void;
 };
 
 export type ModuleStore = AiModuleSlice &
