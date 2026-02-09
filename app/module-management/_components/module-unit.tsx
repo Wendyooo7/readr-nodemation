@@ -167,6 +167,7 @@ export default function ModuleUnit({
         </ModuleSettingPopUpLayout>
         {!isDefault && (
           <Button
+            onClick={() => handleClick(id, actionCode)}
             variant="ghost"
             className={cn(trashIconWrapperVariants({ actionCode }))}
           >
