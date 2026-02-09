@@ -15,4 +15,10 @@ export const createCodeModuleSlice: StateCreator<
         { id: crypto.randomUUID(), name, description },
       ],
     })),
+  deleteCodeModule: (id: string) =>
+    set((state) => ({
+      CodeModules: [
+        ...state.CodeModules.filter((codeModule) => codeModule.id !== id),
+      ],
+    })),
 });
