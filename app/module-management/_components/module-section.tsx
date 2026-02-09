@@ -46,7 +46,7 @@ export default function ModuleSection() {
                   description={unit.description}
                   active={true}
                   // TODO: 暫時將上行 'active' 屬性值寫死為真, 之後此屬性將由 state 接手
-                  popUpChild={<unit.popUpChild />}
+                  popUpChild={unit.popUpChild}
                   isDefault={unit.isDefault}
                 />
               ))}
