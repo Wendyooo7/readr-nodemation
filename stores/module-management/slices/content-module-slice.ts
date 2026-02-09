@@ -15,4 +15,12 @@ export const createContentModuleSlice: StateCreator<
         { id: crypto.randomUUID(), name, description },
       ],
     })),
+  deleteContentModule: (id: string) =>
+    set((state) => ({
+      ContentModules: [
+        ...state.ContentModules.filter(
+          (contentModule) => contentModule.id !== id,
+        ),
+      ],
+    })),
 });
