@@ -26,6 +26,7 @@ export default function ModuleSection() {
             actionIcon: defaultModule.units[0].actionIcon,
             actionCode: defaultModule.units[0].actionCode,
             popUpChild: defaultModule.units[0].popUpChild,
+            active: true, // 先寫死為真，之後再改成由 state 接手
             isDefault: false,
           })) || [];
 
