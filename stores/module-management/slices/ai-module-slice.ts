@@ -15,4 +15,8 @@ export const createAiModuleSlice: StateCreator<
         { id: crypto.randomUUID(), name, description },
       ],
     })),
+  deleteAiModule: (id: string) =>
+    set((state) => ({
+      AiModules: [...state.AiModules.filter((aiModule) => aiModule.id !== id)],
+    })),
 });
