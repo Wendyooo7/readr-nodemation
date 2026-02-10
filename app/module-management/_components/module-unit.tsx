@@ -9,6 +9,7 @@ import type { ModuleUnit } from "@/stores/module-management/types";
 import ModuleSettingPopUpLayout from "./module-setting-popup-layout";
 import { Button } from "@/components/ui/button";
 import { useModuleStore } from "@/stores/module-management/module-store";
+import { useState } from "react";
 
 const actionIconVariants = cva(
   "flex items-center justify-center size-10 rounded-[10px] text-white",
@@ -83,6 +84,12 @@ export default function ModuleUnit({
   VariantProps<typeof actionCodeVariants> &
   VariantProps<typeof trashIconVariants> &
   VariantProps<typeof trashIconWrapperVariants>) {
+  const [isActive, setIsActive] = useState(active);
+
+  const handleToggle = () => {
+    setIsActive((prev) => !prev);
+  };
+
   const {
     deleteAiModule,
     deleteCodeModule,
@@ -117,6 +124,7 @@ export default function ModuleUnit({
       </div>
       <div className="flex items-center gap-x-3">
         <Image
+          onClick={() => handleToggle()}
           src={toggleActive}
           width={30}
           height={16}
@@ -153,6 +161,7 @@ export default function ModuleUnit({
       </div>
       <div className="flex items-center gap-x-3">
         <Image
+          onClick={() => handleToggle()}
           src={toggleInactive}
           width={30}
           height={16}
@@ -193,7 +202,7 @@ export default function ModuleUnit({
           <div className="body-3 text-gray-700">{description}</div>
         </div>
       </div>
-      {active ? activeUnit : inactiveUnit}
+      {isActive ? activeUnit : inactiveUnit}
       {/* TODO: 做完 toggle 功能後：
       1. 實測決定上行用整塊/局部渲染對使用者體驗較好
       2. 承上，決定寫法要：
