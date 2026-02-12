@@ -8,7 +8,6 @@ import type { ModuleUnit } from "@/stores/module-management/types";
 import ModuleSettingPopUpLayout from "./module-setting-popup-layout";
 import { Button } from "@/components/ui/button";
 import { useModuleStore } from "@/stores/module-management/module-store";
-import { useState } from "react";
 
 const actionIconVariants = cva(
   "flex items-center justify-center size-10 rounded-[10px] text-white",
