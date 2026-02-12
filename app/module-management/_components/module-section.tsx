@@ -9,15 +9,15 @@ import { useModuleStore } from "@/stores/module-management/module-store";
 import ModuleUnit from "./module-unit";
 
 export default function ModuleSection() {
-  const userModules = useModuleStore((state) => state);
+  const modules = useModuleStore((state) => state);
 
   return (
     <section className="flex flex-col gap-y-10">
       {DEFAULT_MODULES.map((defaultModule) => {
-        const userCreatedModules: ModuleUnitType[] =
+        const units: ModuleUnitType[] =
           (
-            userModules[
-              defaultModule.storeKey as keyof typeof userModules
+            modules[
+              defaultModule.storeKey as keyof typeof modules
             ] as BasicModuleData[]
           )?.map((module) => ({
             ...module,
@@ -26,11 +26,9 @@ export default function ModuleSection() {
             actionIcon: defaultModule.units[0].actionIcon,
             actionCode: defaultModule.units[0].actionCode,
             popUpChild: defaultModule.units[0].popUpChild,
-            active: true, // 先寫死為真，之後再改成由 state 接手
-            isDefault: false,
+            isDefault: module.isDefault,
+            isActive: module.isActive,
           })) || [];
-
-        const units = [...defaultModule.units, ...userCreatedModules];
 
         return (
           <div key={defaultModule.name}>
@@ -44,8 +42,7 @@ export default function ModuleSection() {
                   actionIcon={unit.actionIcon}
                   actionCode={unit.actionCode}
                   description={unit.description}
-                  active={true}
-                  // TODO: 暫時將上行 'active' 屬性值寫死為真, 之後此屬性將由 state 接手
+                  isActive={unit.isActive}
                   popUpChild={unit.popUpChild}
                   isDefault={unit.isDefault}
                 />

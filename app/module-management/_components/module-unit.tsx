@@ -76,7 +76,7 @@ export default function ModuleUnit({
   actionIcon: ActionIcon,
   actionCode,
   description,
-  active,
+  isActive,
   popUpChild,
   isDefault,
 }: ModuleUnit &
@@ -84,18 +84,35 @@ export default function ModuleUnit({
   VariantProps<typeof actionCodeVariants> &
   VariantProps<typeof trashIconVariants> &
   VariantProps<typeof trashIconWrapperVariants>) {
-  const [isActive, setIsActive] = useState(active);
-
-  const handleToggle = () => {
-    setIsActive((prev) => !prev);
-  };
-
   const {
+    toggleAiModuleActiveState,
+    toggleCodeModuleActiveState,
+    toggleCmsModuleActiveState,
+    toggleContentModuleActiveState,
     deleteAiModule,
     deleteCodeModule,
     deleteCmsModule,
     deleteContentModule,
   } = useModuleStore();
+
+  const handleToggle = (id: string, actionCode: string) => {
+    switch (actionCode) {
+      case "ai":
+        toggleAiModuleActiveState(id);
+        break;
+      case "code":
+        toggleCodeModuleActiveState(id);
+        break;
+      case "cms":
+        toggleCmsModuleActiveState(id);
+        break;
+      case "content":
+        toggleContentModuleActiveState(id);
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleClick = (id: string, actionCode: string) => {
     switch (actionCode) {
@@ -124,7 +141,7 @@ export default function ModuleUnit({
       </div>
       <div className="flex items-center gap-x-3">
         <Image
-          onClick={() => handleToggle()}
+          onClick={() => handleToggle(id, actionCode)}
           src={toggleActive}
           width={30}
           height={16}
@@ -161,7 +178,7 @@ export default function ModuleUnit({
       </div>
       <div className="flex items-center gap-x-3">
         <Image
-          onClick={() => handleToggle()}
+          onClick={() => handleToggle(id, actionCode)}
           src={toggleInactive}
           width={30}
           height={16}
