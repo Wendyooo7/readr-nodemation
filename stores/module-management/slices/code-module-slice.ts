@@ -41,8 +41,8 @@ export const createCodeModuleSlice: StateCreator<
     })),
   deleteCodeModule: (id: string) =>
     set((state) => ({
-      CodeModules: [
-        ...state.CodeModules.filter((codeModule) => codeModule.id !== id),
-      ],
+      CodeModules: state.CodeModules.filter(
+        (codeModule) => codeModule.id !== id,
+      ),
     })),
 });

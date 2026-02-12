@@ -41,6 +41,6 @@ export const createAiModuleSlice: StateCreator<
     })),
   deleteAiModule: (id: string) =>
     set((state) => ({
-      AiModules: [...state.AiModules.filter((aiModule) => aiModule.id !== id)],
+      AiModules: state.AiModules.filter((aiModule) => aiModule.id !== id),
     })),
 });

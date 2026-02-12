@@ -41,8 +41,6 @@ export const createCmsModuleSlice: StateCreator<
     })),
   deleteCmsModule: (id: string) =>
     set((state) => ({
-      CmsModules: [
-        ...state.CmsModules.filter((cmsModule) => cmsModule.id !== id),
-      ],
+      CmsModules: state.CmsModules.filter((cmsModule) => cmsModule.id !== id),
     })),
 });

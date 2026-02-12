@@ -41,10 +41,8 @@ export const createContentModuleSlice: StateCreator<
     })),
   deleteContentModule: (id: string) =>
     set((state) => ({
-      ContentModules: [
-        ...state.ContentModules.filter(
-          (contentModule) => contentModule.id !== id,
-        ),
-      ],
+      ContentModules: state.ContentModules.filter(
+        (contentModule) => contentModule.id !== id,
+      ),
     })),
 });
