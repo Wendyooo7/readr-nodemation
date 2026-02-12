@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { CircleCheck, CircleX, Trash2 } from "lucide-react";
 import Image from "next/image";
-import * as React from "react";
 import { cn } from "@/lib/utils";
 import toggleActive from "@/public/module-management/toggle-active.svg";
 import toggleInactive from "@/public/module-management/toggle-inactive.svg";
