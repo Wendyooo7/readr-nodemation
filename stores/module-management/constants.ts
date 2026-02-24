@@ -1,11 +1,4 @@
-import {
-  Code2,
-  Database,
-  Download,
-  FileSpreadsheet,
-  Share2,
-  Sparkles,
-} from "lucide-react";
+import { Code2, Database, Download, Share2, Sparkles } from "lucide-react";
 import type { ModuleType } from "@/stores/module-management/types";
 
 export const DEFAULT_MODULES: ModuleType[] = [
@@ -69,14 +62,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Download,
         actionCode: "content",
         description: "將處理結果匯出為檔案",
-        isDefault: true,
-      },
-      {
-        id: crypto.randomUUID(),
-        action: "產出報告紀錄",
-        actionIcon: FileSpreadsheet,
-        actionCode: "content",
-        description: "產出處理報告",
         isDefault: true,
       },
     ],
