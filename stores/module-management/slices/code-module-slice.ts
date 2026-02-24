@@ -45,4 +45,10 @@ export const createCodeModuleSlice: StateCreator<
         (codeModule) => codeModule.id !== id,
       ),
     })),
+  editCodeModule: (id: string, language: string, description?: string) =>
+    set((state) => ({
+      CodeModules: state.CodeModules.map((module) =>
+        module.id === id ? { ...module, description, language } : module,
+      ),
+    })),
 });

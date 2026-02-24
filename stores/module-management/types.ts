@@ -1,9 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 
-export type PopUpChildProps = {
-  action?: string;
-};
-
 export type ModuleType = {
   name: string;
   storeKey: "AiModules" | "CmsModules" | "CodeModules" | "ContentModules";
@@ -16,7 +12,6 @@ export type ModuleUnitConstant = {
   actionIcon: LucideIcon;
   actionCode: "ai" | "code" | "cms" | "content";
   description?: string;
-  popUpChild: React.ComponentType<PopUpChildProps>;
   isDefault: boolean;
 };
 
@@ -26,7 +21,6 @@ export type ModuleUnit = {
   actionIcon: LucideIcon;
   actionCode: "ai" | "code" | "cms" | "content";
   description?: string;
-  popUpChild: React.ComponentType<PopUpChildProps>;
   isDefault: boolean;
   isActive: boolean;
 };
@@ -44,6 +38,12 @@ export type AiModuleSlice = {
   addAiModule: (name: string, description?: string) => void;
   toggleAiModuleActiveState: (id: string) => void;
   deleteAiModule: (id: string) => void;
+  editAiModule: (
+    id: string,
+    apiKey: string,
+    apiTimeout: number,
+    description?: string,
+  ) => void;
 };
 
 export type CodeModuleSlice = {
@@ -51,6 +51,7 @@ export type CodeModuleSlice = {
   addCodeModule: (name: string, description?: string) => void;
   toggleCodeModuleActiveState: (id: string) => void;
   deleteCodeModule: (id: string) => void;
+  editCodeModule: (id: string, language: string, description?: string) => void;
 };
 
 export type CmsModuleSlice = {
@@ -58,6 +59,12 @@ export type CmsModuleSlice = {
   addCmsModule: (name: string, description?: string) => void;
   toggleCmsModuleActiveState: (id: string) => void;
   deleteCmsModule: (id: string) => void;
+  editCmsModule: (
+    id: string,
+    apiEndpoint: string,
+    apiKey: string,
+    description?: string,
+  ) => void;
 };
 
 export type ContentModuleSlice = {
@@ -65,6 +72,11 @@ export type ContentModuleSlice = {
   addContentModule: (name: string, description?: string) => void;
   toggleContentModuleActiveState: (id: string) => void;
   deleteContentModule: (id: string) => void;
+  editContentModule: (
+    id: string,
+    outputFormat: string,
+    description?: string,
+  ) => void;
 };
 
 export type ModuleStore = AiModuleSlice &

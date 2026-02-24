@@ -43,4 +43,17 @@ export const createAiModuleSlice: StateCreator<
     set((state) => ({
       AiModules: state.AiModules.filter((aiModule) => aiModule.id !== id),
     })),
+  editAiModule: (
+    id: string,
+    apiKey: string,
+    apiTimeout: number,
+    description?: string,
+  ) =>
+    set((state) => ({
+      AiModules: state.AiModules.map((module) =>
+        module.id === id
+          ? { ...module, description, apiKey, apiTimeout }
+          : module,
+      ),
+    })),
 });

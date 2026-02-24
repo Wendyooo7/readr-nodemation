@@ -45,4 +45,10 @@ export const createContentModuleSlice: StateCreator<
         (contentModule) => contentModule.id !== id,
       ),
     })),
+  editContentModule: (id: string, outputFormat: string, description?: string) =>
+    set((state) => ({
+      ContentModules: state.ContentModules.map((module) =>
+        module.id === id ? { ...module, description, outputFormat } : module,
+      ),
+    })),
 });

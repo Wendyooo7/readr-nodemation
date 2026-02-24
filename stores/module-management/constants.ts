@@ -8,11 +8,6 @@ import {
 } from "lucide-react";
 import type { ModuleType } from "@/stores/module-management/types";
 
-import AiModulePopUpChild from "@/app/module-management/_components/ai-module-popup-child";
-import CmsModulePopUpChild from "@/app/module-management/_components/cms-module-popup-child";
-import CodeModulePopUpChild from "@/app/module-management/_components/code-module-popup-child";
-import ContentModulePopUpChild from "@/app/module-management/_components/content-module-popup-child";
-
 export const DEFAULT_MODULES: ModuleType[] = [
   {
     name: "AI 模組",
@@ -24,7 +19,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Sparkles,
         actionCode: "ai",
         description: "透過 AI 進行內容處理",
-        popUpChild: AiModulePopUpChild,
         isDefault: true,
       },
     ],
@@ -39,7 +33,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Code2,
         actionCode: "code",
         description: "輸入程式碼來處理資料",
-        popUpChild: CodeModulePopUpChild,
         isDefault: true,
       },
     ],
@@ -54,7 +47,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Database,
         actionCode: "cms",
         description: "從 CMS 系統抓取內容",
-        popUpChild: CmsModulePopUpChild,
         isDefault: true,
       },
       {
@@ -63,7 +55,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Share2,
         actionCode: "cms",
         description: "將內容輸出到 CMS 系統",
-        popUpChild: CmsModulePopUpChild,
         isDefault: true,
       },
     ],
@@ -78,7 +69,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: Download,
         actionCode: "content",
         description: "將處理結果匯出為檔案",
-        popUpChild: ContentModulePopUpChild,
         isDefault: true,
       },
       {
@@ -87,7 +77,6 @@ export const DEFAULT_MODULES: ModuleType[] = [
         actionIcon: FileSpreadsheet,
         actionCode: "content",
         description: "產出處理報告",
-        popUpChild: ContentModulePopUpChild,
         isDefault: true,
       },
     ],

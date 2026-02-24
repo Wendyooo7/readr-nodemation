@@ -5,7 +5,10 @@ import { cn } from "@/lib/utils";
 import toggleActive from "@/public/module-management/toggle-active.svg";
 import toggleInactive from "@/public/module-management/toggle-inactive.svg";
 import type { ModuleUnit } from "@/stores/module-management/types";
-import ModuleSettingPopUpLayout from "./module-setting-popup-layout";
+import AiModulePopUpChild from "./ai-module-popup-child";
+import CodeModulePopUpChild from "./code-module-popup-child";
+import CmsModulePopUpChild from "./cms-module-popup-child";
+import ContentModulePopUpChild from "./content-module-popup-child";
 import { Button } from "@/components/ui/button";
 import { useModuleStore } from "@/stores/module-management/module-store";
 
@@ -75,7 +78,6 @@ export default function ModuleUnit({
   actionCode,
   description,
   isActive,
-  popUpChild,
   isDefault,
 }: ModuleUnit &
   VariantProps<typeof actionIconVariants> &
@@ -131,6 +133,43 @@ export default function ModuleUnit({
     }
   };
 
+  const renderSettingPopup = () => {
+    switch (actionCode) {
+      case "ai":
+        return (
+          <AiModulePopUpChild
+            id={id}
+            action={action}
+            initialDescription={description}
+          />
+        );
+      case "code":
+        return (
+          <CodeModulePopUpChild
+            id={id}
+            action={action}
+            initialDescription={description}
+          />
+        );
+      case "cms":
+        return (
+          <CmsModulePopUpChild
+            id={id}
+            action={action}
+            initialDescription={description}
+          />
+        );
+      case "content":
+        return (
+          <ContentModulePopUpChild
+            id={id}
+            action={action}
+            initialDescription={description}
+          />
+        );
+    }
+  };
+
   const activeUnit = (
     <div className="flex justify-between items-center border-t border-gray-400 pt-4">
       <div className="flex items-center gap-x-2 text-green-500">
@@ -146,12 +185,7 @@ export default function ModuleUnit({
           alt="啟用模組"
           className="cursor-pointer"
         />
-        <ModuleSettingPopUpLayout action={action} description={description}>
-          {({ action }) => {
-            const PopUpChildComponent = popUpChild;
-            return <PopUpChildComponent action={action} />;
-          }}
-        </ModuleSettingPopUpLayout>
+        {renderSettingPopup()}
         {!isDefault && (
           <Button
             onClick={() => handleClick(id, actionCode)}
@@ -183,12 +217,7 @@ export default function ModuleUnit({
           alt="停用模組"
           className="cursor-pointer"
         />
-        <ModuleSettingPopUpLayout action={action} description={description}>
-          {({ action }) => {
-            const PopUpChildComponent = popUpChild;
-            return <PopUpChildComponent action={action} />;
-          }}
-        </ModuleSettingPopUpLayout>
+        {renderSettingPopup()}
         {!isDefault && (
           <Button
             onClick={() => handleClick(id, actionCode)}

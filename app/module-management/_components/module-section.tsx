@@ -25,7 +25,6 @@ export default function ModuleSection() {
             action: module.name,
             actionIcon: defaultModule.units[0].actionIcon,
             actionCode: defaultModule.units[0].actionCode,
-            popUpChild: defaultModule.units[0].popUpChild,
             isDefault: module.isDefault,
             isActive: module.isActive,
           })) || [];
@@ -43,7 +42,6 @@ export default function ModuleSection() {
                   actionCode={unit.actionCode}
                   description={unit.description}
                   isActive={unit.isActive}
-                  popUpChild={unit.popUpChild}
                   isDefault={unit.isDefault}
                 />
               ))}

@@ -43,4 +43,17 @@ export const createCmsModuleSlice: StateCreator<
     set((state) => ({
       CmsModules: state.CmsModules.filter((cmsModule) => cmsModule.id !== id),
     })),
+  editCmsModule: (
+    id: string,
+    apiEndpoint: string,
+    apiKey: string,
+    description?: string,
+  ) =>
+    set((state) => ({
+      CmsModules: state.CmsModules.map((module) =>
+        module.id === id
+          ? { ...module, description, apiEndpoint, apiKey }
+          : module,
+      ),
+    })),
 });
