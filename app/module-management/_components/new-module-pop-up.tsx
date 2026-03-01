@@ -39,8 +39,13 @@ export default function NewModulePopUp() {
   const [moduleType, setModuleType] = useState("ai");
   const moduleDescriptionRef = useRef<HTMLInputElement>(null);
 
-  const { addAiModule, addCodeModule, addCmsModule, addContentModule } =
-    useModuleStore();
+  const {
+    addAiModule,
+    addCodeModule,
+    addCmsImportModule,
+    addCmsExportModule,
+    addContentModule,
+  } = useModuleStore();
 
   const handleSubmit = () => {
     const moduleName = moduleNameRef.current?.value;
@@ -57,8 +62,11 @@ export default function NewModulePopUp() {
       case "code":
         addCodeModule(moduleName, moduleDescription);
         break;
-      case "cms":
-        addCmsModule(moduleName, moduleDescription);
+      case "cms-import":
+        addCmsImportModule(moduleName, moduleDescription);
+        break;
+      case "cms-export":
+        addCmsExportModule(moduleName, moduleDescription);
         break;
       case "content":
         addContentModule(moduleName, moduleDescription);
@@ -130,8 +138,11 @@ export default function NewModulePopUp() {
                   <SelectItem value="code" className="cursor-pointer">
                     程式碼模組
                   </SelectItem>
-                  <SelectItem value="cms" className="cursor-pointer">
-                    CMS 模組
+                  <SelectItem value="cms-import" className="cursor-pointer">
+                    CMS 模組（從 CMS 輸入）
+                  </SelectItem>
+                  <SelectItem value="cms-export" className="cursor-pointer">
+                    CMS 模組（輸出到 CMS）
                   </SelectItem>
                   <SelectItem value="content" className="cursor-pointer">
                     內容整理模組

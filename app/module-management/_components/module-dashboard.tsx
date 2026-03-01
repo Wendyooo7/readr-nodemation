@@ -4,11 +4,18 @@ import { useModuleStore } from "@/stores/module-management/module-store";
 import { useShallow } from "zustand/react/shallow";
 
 export default function ModuleDashboard() {
-  const { AiModules, CodeModules, CmsModules, ContentModules } = useModuleStore(
+  const {
+    AiModules,
+    CodeModules,
+    CmsImportModules,
+    CmsExportModules,
+    ContentModules,
+  } = useModuleStore(
     useShallow((state) => ({
       AiModules: state.AiModules,
       CodeModules: state.CodeModules,
-      CmsModules: state.CmsModules,
+      CmsImportModules: state.CmsImportModules,
+      CmsExportModules: state.CmsExportModules,
       ContentModules: state.ContentModules,
     })),
   );
@@ -16,7 +23,8 @@ export default function ModuleDashboard() {
   const allTypesModules = [
     ...AiModules,
     ...CodeModules,
-    ...CmsModules,
+    ...CmsImportModules,
+    ...CmsExportModules,
     ...ContentModules,
   ];
 

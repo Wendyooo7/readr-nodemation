@@ -14,20 +14,59 @@ export default function ModuleSection() {
   return (
     <section className="flex flex-col gap-y-10">
       {DEFAULT_MODULES.map((defaultModule) => {
-        const units: ModuleUnitType[] =
-          (
-            modules[
-              defaultModule.storeKey as keyof typeof modules
-            ] as BasicModuleData[]
-          )?.map((module) => ({
-            ...module,
-            id: module.id,
-            action: module.name,
-            actionIcon: defaultModule.units[0].actionIcon,
-            actionCode: defaultModule.units[0].actionCode,
-            isDefault: module.isDefault,
-            isActive: module.isActive,
-          })) || [];
+        let nonCmsUnits: ModuleUnitType[] = [];
+        let cmsUnits: ModuleUnitType[] = [];
+        let units: ModuleUnitType[] = [];
+
+        if (defaultModule.storeKey === "CmsModules") {
+          const cmsImportUnits: ModuleUnitType[] =
+            (
+              modules[
+                "CmsImportModules" as keyof typeof modules
+              ] as BasicModuleData[]
+            )?.map((module) => ({
+              ...module,
+              id: module.id,
+              action: module.name,
+              actionIcon: defaultModule.units[0].actionIcon,
+              actionCode: defaultModule.units[0].actionCode,
+              isDefault: module.isDefault,
+              isActive: module.isActive,
+            })) || [];
+
+          const cmsExportUnits: ModuleUnitType[] =
+            (
+              modules[
+                "CmsExportModules" as keyof typeof modules
+              ] as BasicModuleData[]
+            )?.map((module) => ({
+              ...module,
+              id: module.id,
+              action: module.name,
+              actionIcon: defaultModule.units[1].actionIcon,
+              actionCode: defaultModule.units[1].actionCode,
+              isDefault: module.isDefault,
+              isActive: module.isActive,
+            })) || [];
+          cmsUnits = [...cmsImportUnits, ...cmsExportUnits];
+        } else {
+          nonCmsUnits =
+            (
+              modules[
+                defaultModule.storeKey as keyof typeof modules
+              ] as BasicModuleData[]
+            )?.map((module) => ({
+              ...module,
+              id: module.id,
+              action: module.name,
+              actionIcon: defaultModule.units[0].actionIcon,
+              actionCode: defaultModule.units[0].actionCode,
+              isDefault: module.isDefault,
+              isActive: module.isActive,
+            })) || [];
+        }
+
+        units = [...nonCmsUnits, ...cmsUnits];
 
         return (
           <div key={defaultModule.name}>

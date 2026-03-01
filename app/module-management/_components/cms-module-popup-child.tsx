@@ -16,16 +16,18 @@ type CmsModulePopUpChildProps = {
   initialDescription?: string;
   initialApiKey?: string;
   initialApiEndpoint?: string;
+  actionCode: "cmsImport" | "cmsExport";
 };
 
 export default function CmsModulePopUpChild({
   id,
   action,
   initialDescription,
+  actionCode,
   initialApiKey = "",
   initialApiEndpoint = "",
 }: CmsModulePopUpChildProps) {
-  const { editCmsModule } = useModuleStore();
+  const { editCmsImportModule, editCmsExportModule } = useModuleStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState(initialDescription || "");
@@ -33,7 +35,12 @@ export default function CmsModulePopUpChild({
   const [apiEndpoint, setApiEndpoint] = useState(initialApiEndpoint);
 
   const handleSave = () => {
-    editCmsModule(id, apiKey, apiEndpoint, description);
+    if (actionCode === "cmsImport") {
+      editCmsImportModule(id, apiKey, apiEndpoint, description);
+    } else {
+      editCmsExportModule(id, apiKey, apiEndpoint, description);
+    }
+
     setIsOpen(false);
   };
 

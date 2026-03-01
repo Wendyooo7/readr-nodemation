@@ -19,7 +19,8 @@ const actionIconVariants = cva(
       actionCode: {
         ai: "bg-red-500",
         code: "bg-purple-500",
-        cms: "bg-green-500",
+        cmsImport: "bg-green-500",
+        cmsExport: "bg-green-500",
         content: "bg-blue-500",
       },
     },
@@ -34,7 +35,8 @@ const actionCodeVariants = cva("absolute top-0 left-4 w-12 h-1 rounded-b-md", {
     actionCode: {
       ai: "bg-red-500",
       code: "bg-purple-500",
-      cms: "bg-green-500",
+      cmsImport: "bg-green-500",
+      cmsExport: "bg-green-500",
       content: "bg-blue-500",
     },
   },
@@ -48,7 +50,8 @@ const trashIconVariants = cva("cursor-pointer", {
     actionCode: {
       ai: "text-red-500",
       code: "text-purple-500",
-      cms: "text-green-500",
+      cmsImport: "text-green-500",
+      cmsExport: "text-green-500",
       content: "text-blue-500",
     },
   },
@@ -62,7 +65,8 @@ const trashIconWrapperVariants = cva("has-[>svg]:px-2", {
     actionCode: {
       ai: "hover:bg-red-100",
       code: "hover:bg-purple-100",
-      cms: "hover:bg-green-100",
+      cmsImport: "hover:bg-green-100",
+      cmsExport: "hover:bg-green-100",
       content: "hover:bg-blue-100",
     },
   },
@@ -87,11 +91,13 @@ export default function ModuleUnit({
   const {
     toggleAiModuleActiveState,
     toggleCodeModuleActiveState,
-    toggleCmsModuleActiveState,
+    toggleCmsImportModuleActiveState,
+    toggleCmsExportModuleActiveState,
     toggleContentModuleActiveState,
     deleteAiModule,
     deleteCodeModule,
-    deleteCmsModule,
+    deleteCmsImportModule,
+    deleteCmsExportModule,
     deleteContentModule,
   } = useModuleStore();
 
@@ -103,8 +109,11 @@ export default function ModuleUnit({
       case "code":
         toggleCodeModuleActiveState(id);
         break;
-      case "cms":
-        toggleCmsModuleActiveState(id);
+      case "cmsImport":
+        toggleCmsImportModuleActiveState(id);
+        break;
+      case "cmsExport":
+        toggleCmsExportModuleActiveState(id);
         break;
       case "content":
         toggleContentModuleActiveState(id);
@@ -122,8 +131,11 @@ export default function ModuleUnit({
       case "code":
         deleteCodeModule(id);
         break;
-      case "cms":
-        deleteCmsModule(id);
+      case "cmsImport":
+        deleteCmsImportModule(id);
+        break;
+      case "cmsExport":
+        deleteCmsExportModule(id);
         break;
       case "content":
         deleteContentModule(id);
@@ -151,12 +163,22 @@ export default function ModuleUnit({
             initialDescription={description}
           />
         );
-      case "cms":
+      case "cmsImport":
         return (
           <CmsModulePopUpChild
             id={id}
             action={action}
             initialDescription={description}
+            actionCode={actionCode}
+          />
+        );
+      case "cmsExport":
+        return (
+          <CmsModulePopUpChild
+            id={id}
+            action={action}
+            initialDescription={description}
+            actionCode={actionCode}
           />
         );
       case "content":

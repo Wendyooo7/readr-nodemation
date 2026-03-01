@@ -10,7 +10,7 @@ export type ModuleUnitConstant = {
   id: string;
   action: string;
   actionIcon: LucideIcon;
-  actionCode: "ai" | "code" | "cms" | "content";
+  actionCode: "ai" | "code" | "cmsImport" | "cmsExport" | "content";
   description?: string;
   isDefault: boolean;
 };
@@ -19,7 +19,7 @@ export type ModuleUnit = {
   id: string;
   action: string;
   actionIcon: LucideIcon;
-  actionCode: "ai" | "code" | "cms" | "content";
+  actionCode: "ai" | "code" | "cmsImport" | "cmsExport" | "content";
   description?: string;
   isDefault: boolean;
   isActive: boolean;
@@ -54,12 +54,25 @@ export type CodeModuleSlice = {
   editCodeModule: (id: string, language: string, description?: string) => void;
 };
 
-export type CmsModuleSlice = {
-  CmsModules: BasicModuleData[];
-  addCmsModule: (name: string, description?: string) => void;
-  toggleCmsModuleActiveState: (id: string) => void;
-  deleteCmsModule: (id: string) => void;
-  editCmsModule: (
+export type CmsImportModuleSlice = {
+  CmsImportModules: BasicModuleData[];
+  addCmsImportModule: (name: string, description?: string) => void;
+  toggleCmsImportModuleActiveState: (id: string) => void;
+  deleteCmsImportModule: (id: string) => void;
+  editCmsImportModule: (
+    id: string,
+    apiEndpoint: string,
+    apiKey: string,
+    description?: string,
+  ) => void;
+};
+
+export type CmsExportModuleSlice = {
+  CmsExportModules: BasicModuleData[];
+  addCmsExportModule: (name: string, description?: string) => void;
+  toggleCmsExportModuleActiveState: (id: string) => void;
+  deleteCmsExportModule: (id: string) => void;
+  editCmsExportModule: (
     id: string,
     apiEndpoint: string,
     apiKey: string,
@@ -81,5 +94,6 @@ export type ContentModuleSlice = {
 
 export type ModuleStore = AiModuleSlice &
   CodeModuleSlice &
-  CmsModuleSlice &
+  CmsImportModuleSlice &
+  CmsExportModuleSlice &
   ContentModuleSlice;

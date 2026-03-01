@@ -1,29 +1,29 @@
 import { StateCreator } from "zustand";
-import { CmsModuleSlice, ModuleStore } from "../types";
+import { CmsImportModuleSlice, ModuleStore } from "../types";
 import { DEFAULT_MODULES } from "../constants";
 
 const cmsDefaultModules =
-  DEFAULT_MODULES.find((module) => module.storeKey === "CmsModules")?.units.map(
-    (unit) => ({
+  DEFAULT_MODULES.find((module) => module.storeKey === "CmsModules")
+    ?.units.filter((unit) => unit.actionCode === "cmsImport")
+    .map((unit) => ({
       id: unit.id,
       name: unit.action,
       description: unit.description,
       isDefault: unit.isDefault,
       isActive: false,
-    }),
-  ) || [];
+    })) || [];
 
-export const createCmsModuleSlice: StateCreator<
+export const createCmsImportModuleSlice: StateCreator<
   ModuleStore,
   [],
   [],
-  CmsModuleSlice
+  CmsImportModuleSlice
 > = (set) => ({
-  CmsModules: cmsDefaultModules,
-  addCmsModule: (name: string, description?: string) =>
+  CmsImportModules: cmsDefaultModules,
+  addCmsImportModule: (name: string, description?: string) =>
     set((state) => ({
-      CmsModules: [
-        ...state.CmsModules,
+      CmsImportModules: [
+        ...state.CmsImportModules,
         {
           id: crypto.randomUUID(),
           name,
@@ -33,24 +33,26 @@ export const createCmsModuleSlice: StateCreator<
         },
       ],
     })),
-  toggleCmsModuleActiveState: (id: string) =>
+  toggleCmsImportModuleActiveState: (id: string) =>
     set((state) => ({
-      CmsModules: state.CmsModules.map((module) =>
+      CmsImportModules: state.CmsImportModules.map((module) =>
         module.id === id ? { ...module, isActive: !module.isActive } : module,
       ),
     })),
-  deleteCmsModule: (id: string) =>
+  deleteCmsImportModule: (id: string) =>
     set((state) => ({
-      CmsModules: state.CmsModules.filter((cmsModule) => cmsModule.id !== id),
+      CmsImportModules: state.CmsImportModules.filter(
+        (cmsModule) => cmsModule.id !== id,
+      ),
     })),
-  editCmsModule: (
+  editCmsImportModule: (
     id: string,
     apiEndpoint: string,
     apiKey: string,
     description?: string,
   ) =>
     set((state) => ({
-      CmsModules: state.CmsModules.map((module) =>
+      CmsImportModules: state.CmsImportModules.map((module) =>
         module.id === id
           ? { ...module, description, apiEndpoint, apiKey }
           : module,
